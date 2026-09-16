@@ -15,11 +15,14 @@ class EditNoteViewBody extends StatelessWidget {
             title: 'Edit',
             iconData: Icons.check,
           ),
-          CustomTextField(hinttext: '', maxline:1),
+           const SizedBox(
+            height: 20,
+          ),
+          CustomTextField(hinttext: 'Title', maxline:1),
           const SizedBox(
             height: 20,
           ),
-            CustomTextField(hinttext: '', maxline:5),
+            CustomTextField(hinttext: 'Des', maxline:5),
           
         ],
       ),
