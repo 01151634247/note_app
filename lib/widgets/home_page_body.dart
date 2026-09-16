@@ -6,10 +6,13 @@ class HomePageBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        customappbar(),
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal:12 ),
+      child: Column(
+        children: [
+          customappbar(),
+        ],
+      ),
     );
   }
 }
