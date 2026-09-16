@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:note_app/pages/home_page.dart';
 
-void main() {
+void main() async{
+  await Hive
+
   runApp(const NoteApp());
 }
 
