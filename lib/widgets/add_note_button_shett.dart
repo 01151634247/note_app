@@ -8,38 +8,80 @@ class addNoteButtonSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return const Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
       child: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(height: 35,),
-          CustomTextField(
-            maxline: 1,
-            hinttext: 'Title',
-          ),
-          const SizedBox(
-            height: 15,
-          ),
-           CustomTextField(
-            maxline: 5,
-            hinttext: 'Des',
-          
-          ),
-          const SizedBox(
-            height: 40,
-          ),
-          Custombutton(),
-          
-            const SizedBox(
-            height: 40,
-          ),
-          
+        child: addNoteForm(),
+      ),
+    );
+  }
+}
 
 
-        
-          ],
+
+class addNoteForm extends StatefulWidget {
+  const addNoteForm({
+    super.key,
+  });
+
+  @override
+  State<addNoteForm> createState() => _addNoteFormState();
+}
+
+class _addNoteFormState extends State<addNoteForm> {
+  final GlobalKey <FormState> formkey=GlobalKey();
+  AutovalidateMode autovalidateMode=AutovalidateMode.disabled;
+  String ? title,subtitle ;
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      autovalidateMode: autovalidateMode,
+      key:formkey ,
+      child: Column(
+        children: [
+          SizedBox(height: 35,),
+        CustomTextField(
+          onSaved: (value) {
+            title=value;
+          },
+          maxline: 1,
+          hinttext: 'Title',
         ),
+        const SizedBox(
+          height: 15,
+        ),
+         CustomTextField(
+           onSaved: (value) {
+          subtitle=value;
+          },
+          maxline: 5,
+          hinttext: 'Des',
+        
+        ),
+        const SizedBox(
+          height: 40,
+        ),
+        Custombutton(
+          onTap: () {
+            if(formkey.currentState!.validate()){
+              formkey.currentState!.save();
+            }else{
+              autovalidateMode=AutovalidateMode.always;
+              setState(() {
+                
+              });
+            }
+          },
+        ),
+        
+          const SizedBox(
+          height: 40,
+        ),
+        
+      
+      
+      
+        ],
       ),
     );
   }
