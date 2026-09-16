@@ -7,6 +7,10 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(onPressed: (){},
+      backgroundColor: Colors.blueAccent,
+      child: Icon(Icons.add),
+      ),
       body:HomePageBody() ,
     );
     

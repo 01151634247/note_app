@@ -6,6 +6,7 @@ class noteListView extends StatelessWidget {
   const noteListView({
     super.key,
   });
+  
 
   @override
   Widget build(BuildContext context) {
