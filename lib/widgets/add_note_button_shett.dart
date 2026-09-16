@@ -27,11 +27,12 @@ class addNoteButtonSheet extends StatelessWidget {
           
           ),
           const SizedBox(
-            height: 80,
+            height: 40,
           ),
           Custombutton(),
+          
             const SizedBox(
-            height: 100,
+            height: 40,
           ),
           
 
