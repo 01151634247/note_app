@@ -16,18 +16,22 @@ class noteItem extends StatelessWidget {
         children: [
           ListTile(
             title: Text('Flutter Tips',style: TextStyle(color: Colors.black,fontSize: 23,fontWeight: FontWeight.bold),),
-            subtitle:Text('Build your career with Ayman Mohamed',style: TextStyle(color: Colors.black.withOpacity(0.3),fontSize: 23),),
+            subtitle:Padding(
+              padding: const EdgeInsets.only(top: 10,bottom: 16),
+              child: Text('Build your career with Ayman Mohamed',style: TextStyle(color: Colors.black.withOpacity(0.4),fontSize: 23),),
+            ),
             trailing: IconButton(onPressed: (){}, icon:Icon(Icons.delete,color: Colors.black,size: 35,)),
           ),
-          Text('Sebtember 2026',style: TextStyle(
-           color: Colors.black.withOpacity(0.3),
-           // fontFamily: 'regular',
-            fontSize: 23,
-          ),),
-
+          Padding(
+            padding: const EdgeInsets.only(right:30),
+            child: Text('Sebtember 2026',style: TextStyle(
+             color: Colors.black.withOpacity(0.4),
+             // fontFamily: 'regular',
+              fontSize: 18,
+            ),),
+          ),
         ],
       ),
-
     );
   }
 }
