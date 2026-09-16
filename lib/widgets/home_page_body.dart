@@ -13,7 +13,10 @@ class HomePageBody extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal:12 ),
       child: Column(
         children: [
-          customappbar(),
+          customappbar(
+            title: 'Notes',
+            iconData:Icons.search,
+          ),
           Expanded(
             child: noteListView(),
           ),
