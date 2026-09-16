@@ -13,11 +13,14 @@ class customappbar extends StatelessWidget{
         children: [
           Text('Notes',style: TextStyle(fontSize: 28),),
           customSearchIcon(),
+        
 
         ],
       ),
     );
   }
-
-
 }
+
+
+
+
