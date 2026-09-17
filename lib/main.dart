@@ -4,15 +4,17 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:note_app/constant.dart';
 import 'package:note_app/cubits/cubit/add_note_cubit.dart';
 import 'package:note_app/model/adaptor_model.dart';
+import 'package:note_app/model/note_model.dart';
 
 import 'package:note_app/pages/home_page.dart';
 import 'package:note_app/simple_bloc_observer.dart';
 
 void main() async {
   await Hive.initFlutter();
-  await Hive.openBox(kNotesBooks);
+   Hive.registerAdapter(AdaptorModel());
+  await Hive.openBox<NoteModel>(kNotesBooks);
   Bloc.observer=SimpleBlocObserver();
-  Hive.registerAdapter(AdaptorModel());
+  
   
 
   runApp(const NoteApp());
@@ -24,19 +26,11 @@ class NoteApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return  MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => AddNoteCubit(),
-
-        ),
-      ],
-      child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(brightness: Brightness.dark, fontFamily: 'Poppins'),
-          home: const HomePage(),
-        
-      ),
+    return  MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(brightness: Brightness.dark, fontFamily: 'Poppins'),
+        home: const HomePage(),
+      
     );
   }
 }

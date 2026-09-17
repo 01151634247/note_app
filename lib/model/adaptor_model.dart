@@ -1,5 +1,6 @@
 
 import 'package:hive/hive.dart';
+import 'package:note_app/model/note_model.dart';
 class AdaptorModel extends TypeAdapter<NoteModel> {
   @override
   final int typeId = 0; // This must match the typeId you choose for this model
@@ -31,16 +32,3 @@ class AdaptorModel extends TypeAdapter<NoteModel> {
 }
 
 // Your Note Model Class
-class NoteModel {
-  final String title;
-  final String subTitle;
-  final String date;
-  final int color;
-
-  NoteModel({
-    required this.title,
-    required this.subTitle,
-    required this.date,
-    required this.color,
-  });
-}
