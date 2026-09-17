@@ -19,24 +19,26 @@ class _addNoteButtonSheetState extends State<addNoteButtonSheet> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => AddNoteCubit(),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12),
-        child: BlocConsumer<AddNoteCubit, AddNoteState>(
-          listener: (context, state) {
-            if (state is AddNoteFailure) {
-              print('failed');
-              state.errMessage;
-            } else if (state is AddNoteSuccess) {
-              Navigator.pop(context);
+      child: BlocConsumer<AddNoteCubit, AddNoteState>(
+        listener: (context, state) {
+          if (state is AddNoteFailure) {
+            print('failed');
+            state.errMessage;
+          } else if (state is AddNoteSuccess) {
+            Navigator.pop(context);
+          }
+        },
+            builder:(context,state){ 
+              return AbsorbPointer(
+                absorbing: state is AddNoteLoading?true:false,
+                child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: SingleChildScrollView(child: addNoteForm()),
+                            ),
+              );
             }
-          },
-          builder: (context, state) {
-            return ModalProgressHUD(
-              inAsyncCall: state is AddNoteLoading ? true : false,
-              child: SingleChildScrollView(child: addNoteForm()),
-            );
-          },
-        ),
+          
+        
       ),
     );
   }
