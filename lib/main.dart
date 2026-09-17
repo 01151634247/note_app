@@ -6,11 +6,14 @@ import 'package:note_app/cubits/cubit/add_note_cubit.dart';
 import 'package:note_app/model/adaptor_model.dart';
 
 import 'package:note_app/pages/home_page.dart';
+import 'package:note_app/simple_bloc_observer.dart';
 
 void main() async {
   await Hive.initFlutter();
   await Hive.openBox(kNotesBooks);
+  Bloc.observer=SimpleBlocObserver();
   Hive.registerAdapter(AdaptorModel());
+  
 
   runApp(const NoteApp());
 }
@@ -25,7 +28,7 @@ class NoteApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => AddNoteCubit(),
-          
+
         ),
       ],
       child: MaterialApp(
