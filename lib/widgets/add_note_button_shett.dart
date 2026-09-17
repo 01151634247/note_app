@@ -1,89 +1,41 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:note_app/cubits/cubit/add_note_cubit.dart';
+import 'package:note_app/widgets/add_note_form.dart';
 import 'package:note_app/widgets/custom_text_field.dart';
 import 'package:note_app/widgets/custombutton.dart';
 
-class addNoteButtonSheet extends StatelessWidget {
+class addNoteButtonSheet extends StatefulWidget {
   const addNoteButtonSheet({super.key});
 
   @override
+  State<addNoteButtonSheet> createState() => _addNoteButtonSheetState();
+}
+
+class _addNoteButtonSheetState extends State<addNoteButtonSheet> {
+
+  @override
   Widget build(BuildContext context) {
-    return const Padding(
+    return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
       child: SingleChildScrollView(
-        child: addNoteForm(),
+        child: BlocConsumer<AddNoteCubit, AddNoteState>(
+          listener: (context, state) {
+               if(state is AddNoteFailure){
+                   print('failed');
+                   state.errMessage;
+               }else if(state is AddNoteSuccess){
+                Navigator.pop(context);
+               }
+          },
+          builder: (context, state) {
+            return  ModalProgressHUD(
+              inAsyncCall:state is AddNoteLoading?true:false,
+              child: addNoteForm());
+          },
+        ),
       ),
     );
   }
 }
-
-
-
-class addNoteForm extends StatefulWidget {
-  const addNoteForm({
-    super.key,
-  });
-
-  @override
-  State<addNoteForm> createState() => _addNoteFormState();
-}
-
-class _addNoteFormState extends State<addNoteForm> {
-  final GlobalKey <FormState> formkey=GlobalKey();
-  AutovalidateMode autovalidateMode=AutovalidateMode.disabled;
-  String ? title,subtitle ;
-  @override
-  Widget build(BuildContext context) {
-    return Form(
-      autovalidateMode: autovalidateMode,
-      key:formkey ,
-      child: Column(
-        children: [
-          SizedBox(height: 35,),
-        CustomTextField(
-          onSaved: (value) {
-            title=value;
-          },
-          maxline: 1,
-          hinttext: 'Title',
-        ),
-        const SizedBox(
-          height: 15,
-        ),
-         CustomTextField(
-           onSaved: (value) {
-          subtitle=value;
-          },
-          maxline: 5,
-          hinttext: 'Des',
-        
-        ),
-        const SizedBox(
-          height: 40,
-        ),
-        Custombutton(
-          onTap: () {
-            if(formkey.currentState!.validate()){
-              formkey.currentState!.save();
-            }else{
-              autovalidateMode=AutovalidateMode.always;
-              setState(() {
-                
-              });
-            }
-          },
-        ),
-        
-          const SizedBox(
-          height: 40,
-        ),
-        
-      
-      
-      
-        ],
-      ),
-    );
-  }
-}
-
