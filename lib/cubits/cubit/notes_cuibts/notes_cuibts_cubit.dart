@@ -9,17 +9,11 @@ import 'package:note_app/model/note_model.dart';
 class NotesCuibtsCubit extends Cubit<NotesCuibtsState> {
   NotesCuibtsCubit() : super(NotesCuibtsInitial());
 
-
+   List<NoteModel>?note; 
    fetchAllNote(){
-    try {
       var notesBox=Hive.box<NoteModel>(kNotesBooks);
-        List<NoteModel> note=notesBox.values.toList();
-      emit(NotesCuibtsSuccess(note));
-    } catch (e) {
-      emit(NotesCuibtsFaliure(e.toString()));
-      
-    }
-
+        note=notesBox.values.toList();
+     
 
    }
 
