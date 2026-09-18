@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:note_app/cubits/cubit/add_note/add_note_cubit.dart';
 import 'package:note_app/cubits/cubit/add_note/add_note_state.dart';
+import 'package:note_app/cubits/cubit/notes_cuibts/notes_cuibts_cubit.dart';
+import 'package:note_app/cubits/cubit/notes_cuibts/notes_cuibts_state.dart';
 import 'package:note_app/widgets/add_note_form.dart';
 import 'package:note_app/widgets/custom_text_field.dart';
 import 'package:note_app/widgets/custombutton.dart';
@@ -25,6 +27,7 @@ class _addNoteButtonSheetState extends State<addNoteButtonSheet> {
             print('failed');
             state.errMessage;
           } else if (state is AddNoteSuccess) {
+            BlocProvider.of<NotesCuibtsCubit>(context).fetchAllNote();
             Navigator.pop(context);
           }
         },
