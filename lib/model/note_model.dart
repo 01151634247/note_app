@@ -1,5 +1,7 @@
 
-class NoteModel{
+import 'package:hive_flutter/hive_flutter.dart';
+
+class NoteModel extends HiveObject {
 final String title ;
  final String subTitle ;
 final String date ;
